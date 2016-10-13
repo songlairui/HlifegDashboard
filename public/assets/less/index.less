@@ -1,0 +1,30 @@
+@base : #f938ab;
+
+h1,h2,h3,h4,h5,h6{padding:0;margin:0}
+
+.container{padding-bottom:1em;}
+.box{
+	color:lighten(@base,30%);
+	background:@base;
+}
+.shadowB{
+	margin:15px 5px;
+	background:#fdfdfe;
+	border:0px solid #ccc;
+	box-shadow:-10px 15px 15px -10px rgba(0,0,0,.2),10px 15px 15px -10px rgba(0,0,0,.2),0 -10px 12px -10px rgba(0,0,0,.1),0 25px 20px -25px rgba(0,0,0,.2),0 25px 20px -20px rgba(0,0,0,.3);
+}
+.topLine.shadowB{
+	background:#333;
+	margin:0 0 20px;
+	box-shadow:0 15px 15px -10px rgba(0,0,0,.1),0 25px 20px -15px rgba(0,0,0,.2),0 25px 20px -20px rgba(0,0,0,.3);
+}
+.topLine span#ico{color:#fff;line-height:2em;padding:.2em .7em;float:right}
+.topLine span#date{line-height:2em;display:inline-block;padding-left:.7em;color:#eee;text-shadow:0 -1px 2px rgba(0,0,0,.3),0 2px 1px rgba(0,0,0,.3),1px 0px 1px rgba(0,0,0,.3),-1px 0 1px rgba(0,0,0,.3)}
+.topLine,.act1st{min-height:3em;}
+
+.main .thead{text-align:center}
+.main .list_ee{padding:.3em 0;}
+.main .list_ee>div[class^='col']{border-top:thin solid #e2e4f5;}
+.main .indicator{text-align:center}
+.main .c{background:green;color:red;text-align:center;margin:2px;line-height:2em;}
+.main .remark{text-align:center}

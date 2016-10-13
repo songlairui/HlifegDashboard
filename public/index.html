@@ -1,3 +1,120 @@
-rice
-new line 
-����Dashboard��Ϊ����ʡ�ġ�
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet/less" type="text/css" href="assets/less/index.less">
+	<script src="assets/js/less.min.js"></script>
+</head>
+<body>
+<div class="container">
+	<div class="row"><div class="shadowB topLine"><h4><span id="date">2016-10-14</span><span id="ico"><span class="glyphicon glyphicon-flag"></span></span></h4></div></div>
+	<div class="row">
+		<div class="col col-xs-6"><div class="target shadowB">
+			<small>Target</small><br>
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active"><a href="#1">上炉提醒</a></li>
+				<li><a href="#1">换料提醒</a></li>
+				<li><a href="#2">熬稀提醒</a></li>
+				<li><a href="#3">燃煤提醒</a></li>
+			</ul>
+		</div></div>
+		<div class="col col-xs-6"><div class="dash shadowB">
+			<small>Jump & Dash Info</small><br>
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active"><a href="piece.html">工件记录</a></li>
+				<li><a href="#1">工时记录</a></li>
+				<li><a href="#2">装车记录</a></li>
+				<li><a href="#3">仓储状态</a></li>
+			</ul>
+		</div></div>
+	</div>
+	<div class="row"><div class="act1st shadowB">Main Act</div></div>
+	<div class="row">
+		<div class="main shadowB"><div class="row">
+			<div class="col col-xs-8">
+				<small>姓名</small><br>
+				<div class="row">
+					<div class="col col-xs-6">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="#1">姓名</a></li>
+							<li><a href="#1">姓名</a></li>
+							<li><a href="#2">姓名</a></li>
+							<li><a href="#3">姓名</a></li>
+						</ul>
+					</div>
+					<div class="col col-xs-6">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="#1">姓名</a></li>
+							<li><a href="#1">姓名</a></li>
+							<li><a href="#2">姓名</a></li>
+							<li><a href="#3">姓名</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col col-xs-4">
+				<small>炉位置和筛层数</small>
+				<div class="row">
+					<div class="col-col-xs-7">
+						<ul>
+							<li><a href="">炉1#</a></li>
+							<li><a href="">炉2#</a></li>
+							<li><a href="">炉3#</a></li>
+							<li><a href="">炉4#</a></li>
+							<li><a href="">炉5#</a></li>
+							<li><a href="">炉6#</a></li>
+							<li><a href="">炉7#</a></li>
+							<li><a href="">炉8#</a></li>
+							<li><a href="">炉9#</a></li>
+						</ul>
+					</div>
+					<div class="col-col-xs-5">
+						<ul>
+							<li><a href="">层1#</a></li>
+							<li><a href="">层2#</a></li>
+							<li><a href="">层3#</a></li>
+							<li><a href="">层4#</a></li>
+							<li><a href="">层5#</a></li>
+							<li><a href="">层6#</a></li>
+							<li><a href="">层7#</a></li>
+							<li><a href="">层8#</a></li>
+							<li><a href="">层9#</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div></div>
+	</div>
+</div>
+			
+	<div class="box">rice
+		new line 
+		做好Dashboard，为老妈省心。
+		今天天气不错
+	</div>
+<div class="tip" id="result"></div>
+<button id="fs">FullScreen</button>
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+<script>
+	(function(){
+		document.getElementById('date').innerHTML= new Date().toLocaleDateString();
+		document.getElementById('result').innerHTML=(location.host || 'localhost').split(':')[0];
+		var btnfs = document.getElementById('fs');
+			/*btnfs.onclick=function(){
+			}*/
+			btnfs.addEventListener("click",function(){
+			var el  = document.documentElement
+				  , rfs = 
+				  			el.requestFullScreen
+				  		||	el.webkitRequestFullScreen
+				  		||	el.mozRequestFullScreen
+				  	;
+			  	rfs.call(el);
+			});
+	})();
+</script>
+</body>
+</html>
