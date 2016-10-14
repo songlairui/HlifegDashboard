@@ -2,47 +2,158 @@
 <html lang="zh">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>记件</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet/less" type="text/css" href="assets/less/index.less">
 	<script src="assets/js/less.min.js"></script>
 </head>
 <body>
-<div class="container">
+<div class="container mobview">
 	<div class="row"><div class="shadowB topLine"><h4><span id="date">2016-10-14</span><span id="ico"><span class="glyphicon glyphicon-flag"></span></span></h4></div></div>
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="main shadowB e-piece">
-				<div class="list-title">
-					<div class="col-xs-4">
-						<div class="thead">位置</div>
-					</div>
-					<div class="col-xs-3">
-						<div class="thead">上午</div>
-					</div>
-					<div class="col-xs-3">
-						<div class="thead">下午</div>
-					</div>
-					<div class="col-xs-2">
-						<div class="thead">？</div>
-					</div>
+				<div class="list-header">
+					<table>
+						<col width="20%">
+		                <col width="13%">
+		                <col width="13%">
+		                <col width="46%">
+						<thead>
+							<tr>
+								<th><span>姓名</span></th>
+								<th><span>上午</span></th>
+								<th><span>下午</span></th>
+								<th><span>合计</span></th>
+							</tr>
+						</thead>
+					</table>
 				</div>
 				<div class="piece-record">
 					<div class="piece-item">
 						<div class="item-header">
 							<div class="entry-name"><span>姓名</span></div>
-							<div class="entry-morning">
+							<div class="entry-num-morning">
 								<div class="ball-num1"><span class="num">x</span></div>
 								<div class="bang-num2"><span class="num">x</span></div>
 							</div>
-							<div class="entry-afternoon">
+							<div class="entry-num-afternoon">
 								<div class="ball-num3"><span class="num">x</span></div>
 								<div class="bang-num4"><span class="num">x</span></div>
 							</div>
 							<div class="entry-summary">
-								球：xx &nbsp;棒：xx &nbsp;<br>
-								总：xx &nbsp;<span class="act">时间明细</span>
+								<div class="col-ary-6">
+								<span class="glyphicon glyphicon-dashboard"></span> ：<span class="num-ball"><span class="glyphicon glyphicon-minus"></span></span> <br>
+								<span class="glyphicon glyphicon-italic"></span> ：<span class="num-ball"><span class="glyphicon glyphicon-minus"></span></span><br>
+								总 ：<span class="glyphicon glyphicon-minus"></span></div>
+								<div class="col-ary-6">2#炉<br>
+								<span class="act">详细</span></div>
+							</div>
+						</div>
+					</div>
+					<div class="piece-item">
+						<div class="item-header">
+							<div class="entry-name"><span>姓名</span></div>
+							<div class="entry-num-morning">
+								<div class="ball-num1"><span class="num">x</span></div>
+								<div class="bang-num2"><span class="num">x</span></div>
+							</div>
+							<div class="entry-num-afternoon">
+								<div class="ball-num3"><span class="num">x</span></div>
+								<div class="bang-num4"><span class="num">x</span></div>
+							</div>
+							<div class="entry-summary">
+								<div class="col-ary-6">
+								<span class="glyphicon glyphicon-dashboard"></span> ：<span class="num-ball"><span class="glyphicon glyphicon-minus"></span></span> <br>
+								<span class="glyphicon glyphicon-italic"></span> ：<span class="num-ball"><span class="glyphicon glyphicon-minus"></span></span><br>
+								总 ：<span class="glyphicon glyphicon-minus"></span></div>
+								<div class="col-ary-6">2#炉<br>
+								<span class="act">详细</span></div>
+							</div>
+						</div>
+					</div>
+					<div class="piece-item">
+						<div class="item-header">
+							<div class="entry-name"><span>姓名</span></div>
+							<div class="entry-num-morning">
+								<div class="ball-num1"><span class="num">x</span></div>
+								<div class="bang-num2"><span class="num">x</span></div>
+							</div>
+							<div class="entry-num-afternoon">
+								<div class="ball-num3"><span class="num">x</span></div>
+								<div class="bang-num4"><span class="num">x</span></div>
+							</div>
+							<div class="entry-summary">
+								<div class="col-ary-6">
+								<span class="glyphicon glyphicon-dashboard"></span> ：<span class="num-ball"><span class="glyphicon glyphicon-minus"></span></span> <br>
+								<span class="glyphicon glyphicon-italic"></span> ：<span class="num-ball"><span class="glyphicon glyphicon-minus"></span></span><br>
+								总 ：<span class="glyphicon glyphicon-minus"></span></div>
+								<div class="col-ary-6">2#炉<br>
+								<span class="act">详细</span></div>
+							</div>
+						</div>
+					</div>
+					<div class="piece-item">
+						<div class="item-header">
+							<div class="entry-name"><span>姓名</span></div>
+							<div class="entry-num-morning">
+								<div class="ball-num1"><span class="num">x</span></div>
+								<div class="bang-num2"><span class="num">x</span></div>
+							</div>
+							<div class="entry-num-afternoon">
+								<div class="ball-num3"><span class="num">x</span></div>
+								<div class="bang-num4"><span class="num">x</span></div>
+							</div>
+							<div class="entry-summary">
+								<div class="col-ary-6">
+								<span class="glyphicon glyphicon-dashboard"></span> ：<span class="num-ball"><span class="glyphicon glyphicon-minus"></span></span> <br>
+								<span class="glyphicon glyphicon-italic"></span> ：<span class="num-ball"><span class="glyphicon glyphicon-minus"></span></span><br>
+								总 ：<span class="glyphicon glyphicon-minus"></span></div>
+								<div class="col-ary-6">2#炉<br>
+								<span class="act">详细</span></div>
+							</div>
+						</div>
+					</div>
+					<div class="piece-item">
+						<div class="item-header">
+							<div class="entry-name"><span>姓名</span></div>
+							<div class="entry-num-morning">
+								<div class="ball-num1"><span class="num">x</span></div>
+								<div class="bang-num2"><span class="num">x</span></div>
+							</div>
+							<div class="entry-num-afternoon">
+								<div class="ball-num3"><span class="num">x</span></div>
+								<div class="bang-num4"><span class="num">x</span></div>
+							</div>
+							<div class="entry-summary">
+								<div class="col-ary-6">
+								<span class="glyphicon glyphicon-dashboard"></span> ：<span class="num-ball"><span class="glyphicon glyphicon-minus"></span></span> <br>
+								<span class="glyphicon glyphicon-italic"></span> ：<span class="num-ball"><span class="glyphicon glyphicon-minus"></span></span><br>
+								总 ：<span class="glyphicon glyphicon-minus"></span></div>
+								<div class="col-ary-6">2#炉<br>
+								<span class="act">详细</span></div>
+							</div>
+						</div>
+					</div>
+					<div class="piece-item">
+						<div class="item-header">
+							<div class="entry-name"><span>姓名</span></div>
+							<div class="entry-num-morning">
+								<div class="ball-num1"><span class="num">x</span></div>
+								<div class="bang-num2"><span class="num">x</span></div>
+							</div>
+							<div class="entry-num-afternoon">
+								<div class="ball-num3"><span class="num">x</span></div>
+								<div class="bang-num4"><span class="num">x</span></div>
+							</div>
+							<div class="entry-summary">
+								<div class="col-ary-6">
+								<span class="glyphicon glyphicon-dashboard"></span> ：<span class="num-ball"><span class="glyphicon glyphicon-minus"></span></span> <br>
+								<span class="glyphicon glyphicon-italic"></span> ：<span class="num-ball"><span class="glyphicon glyphicon-minus"></span></span><br>
+								总 ：<span class="glyphicon glyphicon-minus"></span></div>
+								<div class="col-ary-6">2#炉<br>
+								<span class="act">详细</span></div>
 							</div>
 						</div>
 					</div>
@@ -60,7 +171,26 @@
 		</ul>
 	</div></div>
 </div>
-			
+	<div class="assi" id="keybd9">
+		<div class="arabic">
+			<button class="button" value="1">1</button>
+			<button class="button" value="2">2</button>
+			<button class="button" value="3">3</button>
+			<button class="button" value="4">4</button>
+			<button class="button" value="5">5</button>
+			<button class="button" value="6">6</button>
+			<button class="button" value="7">7</button>
+			<button class="button" value="8">8</button>
+			<button class="button" value="9">9</button>
+			<button class="button" value="0">0</button>
+		</div>
+		<div class="act">
+			<button class="button">好</button>
+			<button class="button">上午</button>
+			<button class="button">A3</button>
+			<button class="button">A4</button>
+		</div>
+	</div>
 	<div class="box">rice
 		new line 
 		做好Dashboard，为省心。
@@ -72,6 +202,9 @@
 <script>
 	(function(){
 		document.getElementById('date').innerHTML= new Date().toLocaleDateString();
+		var info = document.getElementById('result');
+		info.innerHTML+= screen.width+"px";
+		var kbd = document.getElementById('keybd9');
 		var btnfs = document.getElementById('fs');
 			/*btnfs.onclick=function(){
 			}*/
@@ -84,6 +217,26 @@
 				  	;
 			  	rfs.call(el);
 			});
+		var pieces_dom=document.getElementsByClassName('piece-item');
+		for (var i = pieces_dom.length - 1; i >= 0; i--) {
+			var piece_item_nums = pieces_dom[i].getElementsByClassName('num');
+			for (var j = piece_item_nums.length - 1; j >= 0; j--) {
+				var toast = function(row,cell){
+					return function(){
+						info.innerHTML= "row:"+(row+1)+";cell:"+(cell+1);
+						info.innerHTML+= ";Left:"+(this.getBoundingClientRect().left+document.documentElement.scrollLeft)+";Top:"+(this.getBoundingClientRect().top+document.documentElement.scrollTop);
+						if((screen.height-this.getBoundingClientRect().top-document.documentElement.scrollTop)>200){
+							kbd.style.top=Math.floor(this.getBoundingClientRect().bottom+document.documentElement.scrollTop+5)+"px";
+						}else{
+							kbd.style.top=Math.floor(this.getBoundingClientRect().top+document.documentElement.scrollTop-100)+"px";
+						}
+						this.style.color="red";
+					}
+				}
+				piece_item_nums[j].onclick=toast(i,j);
+				piece_item_nums[j].onmouseover=toast(i,j);
+			}
+		}
 	})();
 </script>
 </body>
