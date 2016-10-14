@@ -4,6 +4,14 @@
 	<meta charset="UTF-8">
 	<title>记件</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="theme-color" content="#123456">
+	<link rel="shortcut icon" sizes="192x192" href="assets/img/sum.png">
+	<meta name="apple-mobile-web-app-title" content="记件">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="apple-touch-fullscreen" content="yes" /> 
+	<meta content="email=no" name="format-detection" /> 
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet/less" type="text/css" href="assets/less/index.less">
 	<script src="assets/js/less.min.js"></script>
@@ -225,16 +233,21 @@
 					return function(){
 						info.innerHTML= "row:"+(row+1)+";cell:"+(cell+1);
 						info.innerHTML+= ";Left:"+(this.getBoundingClientRect().left+document.documentElement.scrollLeft)+";Top:"+(this.getBoundingClientRect().top+document.documentElement.scrollTop);
+							kbd.style.left=Math.floor(this.getBoundingClientRect().left+document.documentElement.scrollLeft+5)/10+"px";
 						if((screen.height-this.getBoundingClientRect().top-document.documentElement.scrollTop)>200){
 							kbd.style.top=Math.floor(this.getBoundingClientRect().bottom+document.documentElement.scrollTop+5)+"px";
 						}else{
 							kbd.style.top=Math.floor(this.getBoundingClientRect().top+document.documentElement.scrollTop-100)+"px";
 						}
 						this.style.color="red";
+						//this.style.fontWeight="700";
 					}
 				}
 				piece_item_nums[j].onclick=toast(i,j);
-				piece_item_nums[j].onmouseover=toast(i,j);
+				//piece_item_nums[j].onmouseover=toast(i,j);
+				piece_item_nums[j].onblur=function(){
+					this.style.color='blue';
+				};
 			}
 		}
 	})();
