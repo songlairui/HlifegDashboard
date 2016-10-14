@@ -193,10 +193,10 @@
 			<button class="button" value="0">0</button>
 		</div>
 		<div class="act">
-			<button class="button">好</button>
+			<button class="button">←</button>
 			<button class="button">上午</button>
-			<button class="button">A3</button>
-			<button class="button">A4</button>
+			<button class="button">好</button>
+			<button class="button">空</button>
 		</div>
 	</div>
 	<div class="box">rice
@@ -213,6 +213,48 @@
 		var info = document.getElementById('result');
 		info.innerHTML+= screen.width+"px";
 		var kbd = document.getElementById('keybd9');
+		var kbd_btns = kbd.getElementsByTagName('button');
+		var kbd_obj = {
+			//var handler = document.getElementById('keybd9');
+			target : document.getElementById('result'),
+			changeTarget:function(obj){
+				this.target=obj;
+			},
+			isNormal:function(str){
+				var tmp = +str;//强制转化类型
+				if (!isNaN(tmp)&&tmp>9) {
+					return true;
+				}else{
+					return false;
+				}
+			},
+			inputTarget:function(val){
+				//console.log('要添加的值'+val);
+				//console.log(this.target.innerHTML);
+				var tmpVal = +this.target.innerHTML;
+				//console.log(tmpVal);
+				if(isNaN(tmpVal)){
+					this.target.innerHTML=val;
+				}else{
+					tmpVal=tmpVal+''+val;
+					this.target.innerHTML=tmpVal;//(isNaN(+tmpVal))?"=":tmpVal;
+					//=tmpVal;
+				}
+			},
+			backSpace:function(){
+				if (isNormal(this.target.innerHTML)) {
+					this.target.innerHTML=this.target.innerHTML.substr(0,this.target.innerHTML.length-1);
+				}else{
+					this.target.innerHTML='X';
+				}
+			},
+			clear:function(){
+				this.target.innerHTML='X';
+			},
+			jumpNext:function(){
+				return null;// 暂时不做
+			}
+		};
 		var btnfs = document.getElementById('fs');
 			/*btnfs.onclick=function(){
 			}*/
@@ -226,6 +268,7 @@
 			  	rfs.call(el);
 			});
 		var pieces_dom=document.getElementsByClassName('piece-item');
+		// Piece 事件
 		for (var i = pieces_dom.length - 1; i >= 0; i--) {
 			var piece_item_nums = pieces_dom[i].getElementsByClassName('num');
 			for (var j = piece_item_nums.length - 1; j >= 0; j--) {
@@ -240,6 +283,7 @@
 							kbd.style.top=Math.floor(this.getBoundingClientRect().top+document.documentElement.scrollTop-100)+"px";
 						}
 						this.style.color="red";
+						kbd_obj.changeTarget(this);
 						//this.style.fontWeight="700";
 					}
 				}
@@ -249,6 +293,22 @@
 					this.style.color='blue';
 				};
 			}
+		}
+		//console.log(kbd_btns[0].value);
+		// keybd 事件
+		for (var k = kbd_btns.length - 1; k >= 0; k--) {
+			var tmpEvent=function(k){
+				return function(){
+					console.log('点了一下:'+k);
+					kbd_obj.inputTarget(kbd_btns[k].value);
+					//return(k);
+				};
+			};
+				//var tmp=tmpEvent(k);
+				//console.log(tmp());
+				//console.log(kbd_btns[k].value);
+				//kbd_obj.inputTarget(kbd_btns[k].value);
+			kbd_btns[k].onclick=tmpEvent(k);
 		}
 	})();
 </script>
