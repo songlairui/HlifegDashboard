@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>记件</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="theme-color" content="#123456">
+	<link rel="shortcut icon" sizes="192x192" href="assets/img/sum.png">
+	<meta name="apple-mobile-web-app-title" content="记件">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="apple-touch-fullscreen" content="yes" /> 
+	<meta content="email=no" name="format-detection" /> 
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet/less" type="text/css" href="assets/less/index.less">
+	<script src="assets/js/less.min.js"></script>
+</head>
+<body>
+<div class="container mobview">
+	<div class="row"><div class="shadowB topLine"><h4><span id="date">2016-10-14</span><span id="ico"><span class="glyphicon glyphicon-flag"></span></span></h4></div></div>
+	<div class="row borderB">
+		<div class="col-xs-12">
+			<div class="main e-piece">
+				<div class="list-header">
+					<table>
+						<thead>
+							<tr>
+								<th><span>姓名</span></th>
+								<th><span>上午</span></th>
+								<th><span>下午</span></th>
+								<th><span>合计</span></th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="piece-record">
+					<div class="piece-item">
+						<div class="item-header">
+							<div class="entry-name"><span>姓名</span></div>
+							<div class="entry-num-morning">
+								<div class="ball-num1"><span class="num">x</span></div>
+								<div class="cyli-num2"><span class="num">x</span></div>
+							<!--</div>
+							<div class="entry-num-afternoon">-->
+								<div class="ball-num3"><span class="num">x</span></div>
+								<div class="cyli-num4"><span class="num">x</span></div>
+							</div>
+							<div class="entry-summary">
+								<span class="glyphicon glyphicon-dashboard"></span> ：<span class="num-ball"><span class="glyphicon glyphicon-minus"></span></span> <br>
+								<span class="glyphicon glyphicon-italic"></span> ：<span class="num-cylinder"><span class="glyphicon glyphicon-minus"></span></span><br>
+								总 ：<span class="num-sum"><span class="glyphicon glyphicon-minus"></span></span></div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row"><div class="act1st shadowB">
+		<ul class="nav nav-pills" role="tablist">
+		  <li role="presentation" class="active"><a href="#">日视图</a></li>
+		  <li role="presentation"><a href="#">周视图</a></li>
+		  <li role="presentation"><a href="#">月视图</a></li>
+		  <li role="presentation"><a href="#">年视图</a></li>
+		  <li role="presentation"><a href="index.html">返</a></li>
+		</ul>
+	</div></div>
+</div>
+	<div class="assi" id="keybd9">
+		<div class="arabic">
+			<button class="button" value="1">1</button>
+			<button class="button" value="2">2</button>
+			<button class="button" value="3">3</button>
+			<button class="button" value="4">4</button>
+			<button class="button" value="5">5</button>
+			<button class="button" value="6">6</button>
+			<button class="button" value="7">7</button>
+			<button class="button" value="8">8</button>
+			<button class="button" value="9">9</button>
+			<button class="button" value="0">0</button>
+		</div>
+		<div class="act">
+			<button class="button" value="backSpace">←</button>
+			<button class="button" value="morning">上午</button>
+			<button class="button" value="ok">好</button>
+			<button class="button" value="clear">清空</button>
+			<button class="button" value="switchView">键盘</button>
+		</div>
+	</div>
+	<div class="box">rice
+		new line 
+		做好Dashboard，为省心。
+		今天天气不错
+	</div>
+<div class="tip" id="result"></div>
+<button id="fs">FullScreen</button>
+<script>
+	(function(){
+		document.getElementById('date').innerHTML= new Date().toLocaleDateString();
+		var info = document.getElementById('result');
+		info.innerHTML+= screen.width+"px";
+		var kbd = document.getElementById('keybd9');
+		var kbd_btns = kbd.getElementsByTagName('button');
+		var kbd_obj = {
+			//var handler = document.getElementById('keybd9');
+			target : document.getElementById('result'),
+			kbdVisible : false,
+			changeTarget:function(obj){
+				this.target=obj;
+				return this;
+			},
+			isNormal:function(str){
+				var tmp = +str;//强制转化类型
+				if (!isNaN(tmp)&&tmp>9) {
+					return true;
+				}else{
+					return false;
+				}
+			},
+			isArabic:function(str){
+				var regex=/[0-9]/;// 去掉非（数字或字母）的字符
+				return regex.test(str);
+			},
+			switchAct:function(val){
+				var successed=false;
+				if (this.isArabic(val)) {
+					successed=this.inputTarget(val);
+				}else{
+					console.log(val);
+					switch(val){
+						case 'backSpace':
+							successed=this.backSpace();
+							break;
+						case 'clear':
+							successed=this.clear();
+							break;
+						case 'switchView':
+							successed=this.switchView();
+							break;
+						case 'ok':
+							successed=this.confirm();
+							break;
+                        case 'morning':
+                            successed=this.switchIndicator();
+                            break;
+						default:
+							this.innerHTML='-';
+					};
+				};
+				return successed;
+			},
+            switchIndicator:function(){
+                console.group('子事件');
+                console.log('切换指示动画');
+                var target = document.getElementsByClassName('borderB')[0];
+                if(!target.style.animation){
+                    target.style.animation='active .6s linear infinite alternate';
+                }else{
+                    target.style.animation='';
+                };
+                console.info(target.style.animation);
+                console.groupEnd();
+                return true;
+            },
+			inputTarget:function(val){
+				var tmpVal = +this.target.innerHTML;
+				if(isNaN(tmpVal)){
+					this.target.innerHTML=val;
+				}else{
+					tmpVal=tmpVal+''+val;
+					if (tmpVal.length>2) {
+						tmpVal=tmpVal.substr(0,2);
+						this.target.style.color='blue';
+					};
+					this.target.innerHTML=tmpVal;
+				};
+				return true;
+			},
+			backSpace:function(){
+				this.target.style.color='red';
+				if (this.isNormal(this.target.innerHTML)) {
+					this.target.innerHTML=this.target.innerHTML.substr(0,this.target.innerHTML.length-1);
+				}else{
+					this.target.innerHTML='X';
+				}
+				return true;
+			},
+			switchView:function(){
+				var kbdstyle='none';
+				console.log(this.kbdVisible);
+				if (this.kbdVisible) {
+					kbdstyle='none';
+					this.kbdVisible=false;
+				}else{
+					kbdstyle='block';
+					this.kbdVisible=true;
+				}
+				console.log(kbdstyle);
+				kbd.getElementsByClassName('arabic')[0].style.display=kbdstyle;
+				return true;
+			},
+			clear:function(){
+				this.target.style.color='red';
+				this.target.innerHTML='X';
+				return true;
+			},
+			jumpNext:function(){
+				return null;// 暂时不做
+			},
+			setTip:function(tip){
+				return null;
+			}
+		};
+		var piece_obj={
+			tgt:null,
+			changeTarget:function(obj){
+				this.tgt=obj;
+				//return this;
+			},
+			tune2Calc:function(str){
+				var tmp = +str;//强制转化类型
+				if (!isNaN(tmp)) {
+					return tmp;
+				}else{
+					return 0;
+				}
+			},
+			calc:function(){
+				if(!this.tgt) return;
+				var num11 = this.tgt.getElementsByClassName('ball-num1')[0].getElementsByClassName('num')[0];
+				if(!num11) return;
+				var num21 = this.tgt.getElementsByClassName('cyli-num2')[0].getElementsByClassName('num')[0];
+				var num12 = this.tgt.getElementsByClassName('ball-num3')[0].getElementsByClassName('num')[0];
+				var num22 = this.tgt.getElementsByClassName('cyli-num4')[0].getElementsByClassName('num')[0];
+				var sumBall = this.tgt.getElementsByClassName('entry-summary')[0].getElementsByClassName('num-ball')[0];
+				var sumCyli = this.tgt.getElementsByClassName('entry-summary')[0].getElementsByClassName('num-cylinder')[0];
+				var sumAll = this.tgt.getElementsByClassName('entry-summary')[0].getElementsByClassName('num-sum')[0];
+				
+				sumBall.innerHTML = this.tuneValue(this.tune2Calc(num11.innerHTML)+this.tune2Calc(num12.innerHTML));
+				sumCyli.innerHTML = this.tuneValue(this.tune2Calc(num21.innerHTML)+this.tune2Calc(num22.innerHTML));
+				sumAll.innerHTML = this.tuneValue(this.tune2Calc(sumBall.innerHTML) + this.tune2Calc(sumCyli.innerHTML));
+				//return null;
+			},
+			tuneValue:function(value){
+				/*将 0 转变为 span 标*/
+				if (0===value) {
+					return "<span class=\"glyphicon glyphicon-minus\"></span>";
+				}else{
+					return value;
+				}
+			}
+		}
+		var btnfs = document.getElementById('fs');
+			/*btnfs.onclick=function(){
+			}*/
+			btnfs.addEventListener("click",function(){
+			var el  = document.documentElement
+				  , rfs = 
+				  			el.requestFullScreen
+				  		||	el.webkitRequestFullScreen
+				  		||	el.mozRequestFullScreen
+				  	;
+			  	rfs.call(el);
+			});
+		var pieces_dom=document.getElementsByClassName('piece-item');
+		// Piece 事件
+		for (var i = pieces_dom.length - 1; i >= 0; i--) {
+			var piece_item_nums = pieces_dom[i].getElementsByClassName('num');
+			for (var j = piece_item_nums.length - 1; j >= 0; j--) {
+				var toast = function(row,cell){
+					return function(){
+						info.innerHTML= "row:"+(row+1)+";cell:"+(cell+1);
+						/*info.innerHTML+= ";Left:"+(this.getBoundingClientRect().left+document.documentElement.scrollLeft)+";Top:"+(this.getBoundingClientRect().top+document.documentElement.scrollTop);
+							kbd.style.left=Math.floor(this.getBoundingClientRect().left+document.documentElement.scrollLeft+5)/10+"px";
+						if((screen.height-this.getBoundingClientRect().top-document.documentElement.scrollTop)>200){
+							kbd.style.top="450px";
+						}else{
+							kbd.style.top="px";
+						}
+						*/
+						this.style.color="red";
+						kbd_obj.changeTarget(this);
+						piece_obj.changeTarget(kbd_obj.target.parentNode.parentNode.parentNode.parentNode);
+						//this.style.fontWeight="700";
+					}
+				}
+				piece_item_nums[j].onclick=toast(i,j);
+				//piece_item_nums[j].onmouseover=toast(i,j);
+				piece_item_nums[j].onblur=function(){
+					this.style.color='blue';
+				};
+			}
+		}
+		//console.log(kbd_btns[0].value);
+		// keybd 事件
+		for (var k = kbd_btns.length - 1; k >= 0; k--) {
+			var tmpEvent=function(k){
+				return function(){
+					console.log('点了一下第'+(1+k)+'个按钮：'+kbd_btns[k].value);
+					//console.log(kbd_obj.switchAct(kbd_btns[k].value));
+					if(kbd_obj.switchAct(kbd_btns[k].value)){
+						console.log('开始测算');
+						piece_obj.calc();
+					};
+
+					//return(k);
+				};
+			};
+				//var tmp=tmpEvent(k);
+				//console.log(tmp());
+				//console.log(kbd_btns[k].value);
+				//kbd_obj.inputTarget(kbd_btns[k].value);
+			kbd_btns[k].onclick=tmpEvent(k);
+		};
+
+		document.getElementsByClassName('borderB')[0].style.animation='active .6s linear infinite alternate';
+        document.getElementsByClassName('borderB')[0].style.animation='';
+/*        document.getElementsByClassName('borderB')[0].style.animationDuration='0s';*/
+	})();
+</script>
+</body>
+</html>
