@@ -19,7 +19,7 @@
 <body>
 <div class="container mobview">
 	<div class="row"><div class="shadowB topLine"><h4><span id="date">2016-10-14</span><span id="ico"><span class="glyphicon glyphicon-flag"></span></span></h4></div></div>
-	<div class="row borderB">
+	<div class="row">
 		<div class="col-xs-12">
 			<div class="main e-piece">
 				<div class="list-header">
@@ -34,7 +34,7 @@
 						</thead>
 					</table>
 				</div>
-                <div class="piece-record">
+                <div class="piece-record borderB">
 					    <div class="piece-item">
                             <div class="item-header">
                                 <div class="entry-name"><span>姓名</span></div>
@@ -99,7 +99,8 @@
 		document.getElementById('date').innerHTML= new Date().toLocaleDateString();
 		var info = document.getElementById('result');
 		info.innerHTML+= screen.width+"px";
-
+		var switchon=true; // 开启编辑状态；
+		switchon=true;
 		var piece_obj={
 			tgt:null,
 			changeTarget:function(obj){
@@ -188,27 +189,38 @@
                         this.style.color='black';
                         this.style.background='lightgray';
                     this.style.fontWeight='400';
-					oInp.innerHTML ="<i>e</i> (" + array2string(event.changedTouches) +")";
+					oInp.innerHTML ="<i>e</i> (" + event.changedTouches[0].clientY +")";
+					this.style.transform='translateY(0px)';
 					break;
 				case "touchmove":
-					event.preventDefault();
-					if(initY){
-						var distance=Math.floor(event.touches[0].clientY-initY);
-						//oInp.innerHTML+="<br/><i>m</i> ==>"+Math.floor(event.touches[0].clientY);
-						oInp.innerHTML="<br><i>距离</i> ==>"+distance;
-                        var result = initVal-Math.floor(distance/20);
-						this.innerHTML=(result<minVal?minVal:(result>maxVal?maxVal:result));
-                        this.style.background='gray';
-                        this.style.color='yellow';
-                        this.style.fontWeight='700';
-					}else {
-						oInp.innerHTML = "<b>m</b> (" + array2string(event.touches) + ")";
+					if(switchon){
+						event.preventDefault(); // 阻止默认滑动行为
+						if(initY){
+							var distance=Math.floor((event.touches[0].clientY-initY));
+							//oInp.innerHTML+="<br/><i>m</i> ==>"+Math.floor(event.touches[0].clientY);
+							oInp.innerHTML="initVal='"+initVal+"'<br><i>距离</i> ==>"+distance;
+							var result = initVal-Math.floor(distance/20); // 向下滑超过0之后，会调整初始限。
+
+							if(result<minVal){
+								initVal=Math.floor(distance/20);
+							}
+							this.innerHTML=(result<minVal?minVal:(result>maxVal?maxVal:result));
+							this.style.background='gray';
+							this.style.color='yellow';
+							this.style.fontWeight='700';
+							console.log('开始移动位置');
+							this.style.transform='translateY(-'+(result-initVal)+'px)';
+						}else {
+							oInp.innerHTML = "<b>m</b> (" + '--' + ")";
+						}
+					}else{
+
 					}
 					break;
 			}
 		}
 		document.getElementsByClassName('borderB')[0].style.animation='active .6s linear infinite alternate';
-        document.getElementsByClassName('borderB')[0].style.animation='';
+       /* document.getElementsByClassName('borderB')[0].style.animation='';*/
 /*        document.getElementsByClassName('borderB')[0].style.animationDuration='0s';*/
 	})();
 </script>
